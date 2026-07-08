@@ -1,0 +1,34 @@
+name: WORKFLOW
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el código
+        uses: actions/checkout@v4
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_pgsql, pgsql
+
+      - name: Instalar dependencias de Composer
+        run: composer install --prefer-dist --no-progress
+
+      - name: Copiar archivo .env
+        run: cp .env.example .env
+
+      - name: Generar clave de la aplicación
+        run: php artisan key:generate
+
+      - name: Ejecutar migraciones
+        run: php artisan migrate --force
+
+      - name: Ejecutar pruebas
+        run: php artisan test
