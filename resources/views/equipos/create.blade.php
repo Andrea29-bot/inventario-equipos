@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('titulo', 'Nuevo Equipo')
+@section('titulo', 'Nuevo Equipooo')
 
 @section('contenido')
-    <h1 class="h3 mb-3">Registrar nuevo equipo - PRUEBA</h1>
+    <h1 class="h3 mb-3">Registrar nuevo equipo</h1>
 
     <form action="{{ route('equipos.store') }}" method="POST" class="bg-white p-4 rounded shadow-sm">
         @csrf
